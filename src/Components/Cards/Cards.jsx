@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import cardClasses from "./Cards.module.css";
+const flower = require("../../Shared/images/matchGame/flower-bw.jpeg");
+
 const Cards = (props) => {
   //logic
 
@@ -28,7 +30,7 @@ const Cards = (props) => {
             handleCardIsFlipped();
           }}
         >
-          Back
+          <img src={flower} alt="black and white flower" />
         </div>
       )}
     </div>
