@@ -19,7 +19,7 @@ const Cards = (props) => {
             handleCardIsFlipped();
           }}
         >
-          Front
+          <img src={props.img} alt="" />
         </div>
       ) : (
         <div
