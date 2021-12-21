@@ -13,15 +13,22 @@ const Cards = (props) => {
   return (
     <div className={cardClasses.matchCardBorder}>
       {cardIsFlipped ? (
-        <div className="matchCardFront">I am the front</div>
-      ) : (
         <div
-          className="matchCardBack"
+          className={cardClasses.matchCardFront}
           onClick={() => {
             handleCardIsFlipped();
           }}
         >
-          I am the back
+          Front
+        </div>
+      ) : (
+        <div
+          className={cardClasses.matchCardBack}
+          onClick={() => {
+            handleCardIsFlipped();
+          }}
+        >
+          Back
         </div>
       )}
     </div>

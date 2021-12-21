@@ -1,9 +1,15 @@
 .matchCardBorder {
-  border: 1px, solid, black;
+  margin: 2px;
+  padding: 2px;
 }
 .matchCardFront {
-  color: black;
+  color: blue;
+  width: 200px;
+  height: 200px;
 }
 .matchCardBack {
+  color: white;
   background-color: brown;
+  width: 200px;
+  height: 200px;
 }
