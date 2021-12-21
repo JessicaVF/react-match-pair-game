@@ -1,0 +1,9 @@
+.matchCardBorder {
+  border: 1px, solid, black;
+}
+.matchCardFront {
+  color: black;
+}
+.matchCardBack {
+  background-color: brown;
+}

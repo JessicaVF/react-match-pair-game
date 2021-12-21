@@ -1,15 +1,28 @@
 import React, { useState } from "react";
-
+import cardClasses from "./Cards.module.css";
 const Cards = (props) => {
   //logic
-  const [cardIsFlipped, setCardIsFlipped] = useState(false);
 
+  const [cardIsFlipped, setCardIsFlipped] = useState(false);
+  const handleCardIsFlipped = () => {
+    const cardBool = !cardIsFlipped;
+    setCardIsFlipped(cardBool);
+  };
+
+  //return jsx
   return (
-    <div className="match-card-border">
+    <div className={cardClasses.matchCardBorder}>
       {cardIsFlipped ? (
-        <div className="match-card-front">I am the front</div>
+        <div className="matchCardFront">I am the front</div>
       ) : (
-        <div className="match-card-back">I am the back</div>
+        <div
+          className="matchCardBack"
+          onClick={() => {
+            handleCardIsFlipped();
+          }}
+        >
+          I am the back
+        </div>
       )}
     </div>
   );
