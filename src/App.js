@@ -1,10 +1,10 @@
 //import classes from './App.module.css';
-import CardsBoard from './Components/CardsBoard/CardsBoard';
+import { SocialRouter } from './SocialRouter';
 
 function App() {
   return (
     <>
-      <CardsBoard />
+      <SocialRouter />
     </>
   );
 }
