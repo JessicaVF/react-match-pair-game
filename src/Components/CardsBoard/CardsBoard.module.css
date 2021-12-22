@@ -1,0 +1,4 @@
+.flxrow {
+  display: flex;
+  flex-direction: row;
+}

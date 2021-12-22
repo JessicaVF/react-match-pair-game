@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cards from "../Cards/Cards";
+import BoardClasses from "./CardsBoard.module.css";
 
 //https://randomuser.me/api/?results=5
 
@@ -16,7 +17,8 @@ const CardsBoard = () => {
 
   //return jsx
   return (
-    <div className="game-board">
+    <div className={BoardClasses["flxrow"]}>
+      {/* Game Cards */}
       {imgGroup1 &&
         imgGroup1.map((userObj) => (
           <Cards key={userObj.email} img={userObj.picture.large} />

@@ -10,6 +10,7 @@ export const SocialRouter = () => {
         <Routes>
           <Route path="/" element={<CardsBoard />} />
           <Route path="/home" element={<CardsBoard />} />
+          <Route path="/match-pair" element={<CardsBoard />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,0 +1,12 @@
+.flxrow {
+  display: flex;
+  flex-direction: row;
+}
+.anchor {
+  margin: 3px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+}
