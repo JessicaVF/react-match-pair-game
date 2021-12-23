@@ -5,9 +5,9 @@ import homeScreenStyles from "./HomeScreen.module.css";
 const HomeScreen = () => {
   return (
     <>
-      <div className={homeScreenStyles.main}>
-        <h1>Hello World</h1>
-      </div>
+      <header className={homeScreenStyles.main}>
+        <h1 className="p-5">Hello World</h1>
+      </header>
     </>
   );
 };
