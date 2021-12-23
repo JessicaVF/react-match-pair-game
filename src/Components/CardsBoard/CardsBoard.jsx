@@ -12,6 +12,7 @@ const CardsBoard = () => {
       .then((res) => res.json())
       .then((data) => {
         setImgGroup1([...data.results]);
+        
       });
   }, []);
 
@@ -23,6 +24,11 @@ const CardsBoard = () => {
         imgGroup1.map((userObj) => (
           <Cards key={userObj.email} img={userObj.picture.large} />
         ))}
+        {imgGroup1 &&
+        imgGroup1.map((userObj) => (
+          <Cards key={userObj.email} img={userObj.picture.large} />
+        ))}
+        
     </div>
   );
 };
