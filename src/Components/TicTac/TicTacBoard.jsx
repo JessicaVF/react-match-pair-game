@@ -77,109 +77,115 @@ function TicTacBoard() {
   };
 
   const playerTurn = isPlayerOne ? (
-    <div className={TicTacCss.joueur1} id="player-turn">
-      "P1: Your Turn !"
-    </div>
+    <div className={TicTacCss.joueur1}>"P1: Your Turn !"</div>
   ) : (
-    <div className={TicTacCss.joueur2} id="player-turn">
-      "P2: Your Turn !"
-    </div>
+    <div className={TicTacCss.joueur2}>"P2: Your Turn !"</div>
   );
   const gameWinMsg = !isPlayerOne ? "Player1 wins" : "Player2 wins";
 
   return (
-    <div className={TicTacCss.containertac}>
-      <div className={TicTacCss.rowtac}>
-        <div className={TicTacCss.coltac}>
-          <h1>Morpion</h1>
-          <div id="result"></div>
-          {!gameOver && playerTurn}
-          <table className={TicTacCss["table-style"]}>
-            <tbody>
-              <tr>
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
+    <div className={TicTacCss.bodytac}>
+      <div className={TicTacCss.containertac}>
+        <div className={TicTacCss.rowtac}>
+          <div className={TicTacCss.coltac}>
+            <h1 className={TicTacCss["h1tac"]}>Morpion</h1>
+            <div>
+              <div className={TicTacCss["result"]}></div>
+            </div>
+            {!gameOver && playerTurn}
+            <table className={TicTacCss["table-style"]}>
+              <tbody>
+                <tr>
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
 
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
 
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
-              </tr>
-              <tr>
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
+                </tr>
+                <tr>
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
 
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
 
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
-              </tr>
-              <tr>
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
-                <Square
-                  key={tableNumber}
-                  tdVal={gameTable[tableNumber]}
-                  tblNum={tableNumber++}
-                  onChange={handleGamePlay}
-                  turnBool={isPlayerOne}
-                />
-              </tr>
-            </tbody>
-          </table>
-          <button onClick={() => handleReset()} id="new-game">
-            New Game
-          </button>
-
-          <div id="resultMessage">{gameOver && gameWinMsg}</div>
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
+                </tr>
+                <tr>
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
+                  <Square
+                    key={tableNumber}
+                    tdVal={gameTable[tableNumber]}
+                    tblNum={tableNumber++}
+                    onChange={handleGamePlay}
+                    turnBool={isPlayerOne}
+                  />
+                </tr>
+              </tbody>
+            </table>
+            <button
+              onClick={() => handleReset()}
+              className={TicTacCss["new-game"]}
+            >
+              New Game
+            </button>
+            <div>
+              <div className={TicTacCss["resultMessage"]}>
+                {gameOver && gameWinMsg}
+              </div>
+            </div>
+          </div>
         </div>
+        {/* add a score board? maybe? */}
+        {/* add optional login? maybe? */}
       </div>
-      {/* add a score board? maybe? */}
-      {/* add optional login? maybe? */}
     </div>
   );
 }

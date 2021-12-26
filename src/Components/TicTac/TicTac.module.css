@@ -1,4 +1,4 @@
-body {
+.bodytac {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +33,7 @@ body {
 
 /* Button new-game */
 
-#new-game {
+.new-game {
   border: 2px solid #9429ec;
   background-color: #f4f4f4;
   border-radius: 5px;
@@ -49,14 +49,14 @@ body {
   animation: anim1 5s infinite;
 }
 
-#new-game:hover {
+.new-game:hover {
   background-color: #9914d6;
   color: #2cceff;
   transform: rotate(360deg);
   font-size: 1.6rem;
 }
 
-h1 {
+.h1tac {
   padding-left: 15px;
   text-align: center;
   padding-bottom: 15px;
@@ -64,11 +64,11 @@ h1 {
   text-shadow: 0.4rem 0.3rem 0.7rem #9914d6;
 }
 
-h2 {
+.h2tac {
   text-align: center;
 }
 
-h3 {
+.h3tac {
   text-align: center;
 }
 
@@ -118,7 +118,7 @@ h3 {
   margin: auto;
 }
 
-td {
+.square {
   width: 100px;
   height: 100px;
   border: 5px solid #9914d6;
@@ -128,7 +128,7 @@ td {
   cursor: pointer;
 }
 
-#resultMessage {
+.resultMessage {
   position: relative;
   bottom: 370px;
   font-weight: 500;
