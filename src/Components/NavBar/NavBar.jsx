@@ -10,6 +10,9 @@ const NavBar = () => {
       <a className={NavBarClasses.anchor} href="/match-pair">
         Match Pair
       </a>
+      <a className={NavBarClasses.anchor} href="/tictac">
+        Tic-Tac-Toe
+      </a>
     </div>
   );
 };

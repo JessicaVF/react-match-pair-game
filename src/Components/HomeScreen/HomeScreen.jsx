@@ -1,6 +1,7 @@
 import React from "react";
 
 import homeScreenStyles from "./HomeScreen.module.css";
+const backGroundImage = require("../../Shared/images/matchGame/flower-bw.jpeg");
 
 const HomeScreen = () => {
   return (
