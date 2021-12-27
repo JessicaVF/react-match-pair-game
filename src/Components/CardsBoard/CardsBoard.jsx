@@ -8,14 +8,15 @@ import BoardClasses from "./CardsBoard.module.css";
 
 const CardsBoard = () => {
   const [imgGroup1, setImgGroup1] = useState(null);
-  const [imgGroup2, setImgGroup2] = useState(null);
+  
 
   useEffect(() => {
-    fetch("https://randomuser.me/api/?results=5")
+    fetch("https://randomuser.me/api/?results=50")
       .then((res) => res.json())
       .then((data) => {
-        setImgGroup1([...data.results]);
-        setImgGroup2(shuffle([...data.results]));
+        
+        setImgGroup1(shuffle([...data.results, ...data.results ]));
+        
       });
   }, []);
 
@@ -47,15 +48,10 @@ const CardsBoard = () => {
         {/* Game Cards */}
         {imgGroup1 &&
           imgGroup1.map((userObj) => (
-            <Cards key={userObj.email} img={userObj.picture.large} />
+            <Cards key={userObj.email} img={userObj.picture.large}/>
           ))}
       </div>
-      <div className={BoardClasses["flxrow"]}>
-        {imgGroup2 &&
-          imgGroup2.map((userObj) => (
-            <Cards key={userObj.email} img={userObj.picture.large} />
-          ))}
-      </div>
+      
     </>
   );
 };
