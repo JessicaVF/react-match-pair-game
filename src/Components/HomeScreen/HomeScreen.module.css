@@ -1,0 +1,9 @@
+.main {
+  width: 100%;
+  background: linear-gradient(
+    url("https://mobilegamegraphics.com/wp-content/uploads/2017/12/vector-free-game-assets.jpg"),
+    red,
+    blue,
+    yellow
+  );
+}
