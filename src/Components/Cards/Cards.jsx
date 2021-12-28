@@ -17,11 +17,8 @@ const Cards = (props) => {
   //return jsx
   return (
     <div className={cardClasses.matchCardBorder}>
-      {props.test == props.id ? (console.log("true down", props.test)) : console.log("false down", props.test)}
-
-
-
-      {cardIsFlipped && !props.test.includes(props.id) ? 
+      
+      {cardIsFlipped ? 
       (
         <div
           className={cardClasses.matchCardFront}
