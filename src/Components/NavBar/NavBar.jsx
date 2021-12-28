@@ -13,6 +13,9 @@ const NavBar = () => {
       <a className={NavBarClasses.anchor} href="/tictac">
         Tic-Tac-Toe
       </a>
+      <a className={NavBarClasses.anchor} href="/phrasehunter">
+        Phrase Hunter
+      </a>
     </div>
   );
 };
