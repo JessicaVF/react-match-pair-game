@@ -11,7 +11,7 @@ const CardsBoard = () => {
   
 
   useEffect(() => {
-    fetch("https://randomuser.me/api/?results=50")
+    fetch("https://randomuser.me/api/?results=2")
       .then((res) => res.json())
       .then((data) => {
         
@@ -40,6 +40,19 @@ const CardsBoard = () => {
 
     return array;
   }
+  let card1;
+  const compare = (cardId) => { 
+    if(card1 == undefined){
+      card1 = cardId;
+    }
+    else{
+      if (card1 == cardId){
+        console.log("they match!");
+      }
+      card1 = undefined;
+    }
+    
+  }
 
   //return jsx
   return (
@@ -48,7 +61,7 @@ const CardsBoard = () => {
         {/* Game Cards */}
         {imgGroup1 &&
           imgGroup1.map((userObj) => (
-            <Cards key={userObj.email} img={userObj.picture.large}/>
+            <Cards compare={compare} key={userObj.email} img={userObj.picture.large} id={userObj.email}/>
           ))}
       </div>
       

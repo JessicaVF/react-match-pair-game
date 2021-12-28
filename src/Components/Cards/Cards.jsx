@@ -6,10 +6,13 @@ const Cards = (props) => {
   //logic
 
   const [cardIsFlipped, setCardIsFlipped] = useState(false);
+  
   const handleCardIsFlipped = () => {
     const cardBool = !cardIsFlipped;
     setCardIsFlipped(cardBool);
+    
   };
+
 
   //return jsx
   return (
@@ -28,6 +31,7 @@ const Cards = (props) => {
           className={cardClasses.matchCardBack}
           onClick={() => {
             handleCardIsFlipped();
+            props.compare(props.id);
           }}
         >
           <img src={flower} alt="black and white flower" />
