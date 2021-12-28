@@ -13,27 +13,31 @@ const Cards = (props) => {
     
   };
 
-
+  
   //return jsx
   return (
     <div className={cardClasses.matchCardBorder}>
-      {cardIsFlipped ? (
+      {props.test == props.id ? (console.log("true down", props.test)) : console.log("false down", props.test)}
+
+
+
+      {cardIsFlipped && !props.test.includes(props.id) ? 
+      (
         <div
           className={cardClasses.matchCardFront}
           onClick={() => {
             handleCardIsFlipped();
-          }}
-        >
+          }}>
           <img src={props.img} alt="" />
         </div>
       ) : (
         <div
           className={cardClasses.matchCardBack}
+
           onClick={() => {
             handleCardIsFlipped();
-            props.compare(props.id);
-          }}
-        >
+            props.compare(props.id)
+          }}>
           <img src={flower} alt="black and white flower" />
         </div>
       )}

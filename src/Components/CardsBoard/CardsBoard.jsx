@@ -7,15 +7,15 @@ import BoardClasses from "./CardsBoard.module.css";
 // We take the photos from an API generator of user data: https://randomuser.me/api/?results=5
 
 const CardsBoard = () => {
-  const [imgGroup1, setImgGroup1] = useState(null);
+  const [imgGroup, setImgGroup] = useState(null);
+  const [test, setTest] = useState("");
   
-
   useEffect(() => {
-    fetch("https://randomuser.me/api/?results=2")
+    fetch("https://randomuser.me/api/?results=5")
       .then((res) => res.json())
       .then((data) => {
         
-        setImgGroup1(shuffle([...data.results, ...data.results ]));
+        setImgGroup(shuffle([...data.results, ...data.results ]));
         
       });
   }, []);
@@ -40,15 +40,23 @@ const CardsBoard = () => {
 
     return array;
   }
+
+  // Function compare: We have a external variable that will save the value of the first flipped card
   let card1;
+  let toFlipDown;
+  
   const compare = (cardId) => { 
+    
     if(card1 == undefined){
       card1 = cardId;
     }
     else{
       if (card1 == cardId){
         console.log("they match!");
+        // to do : remove matched cards
       }
+      // to do : flip down cards
+      setTest(cardId, card1);
       card1 = undefined;
     }
     
@@ -59,10 +67,11 @@ const CardsBoard = () => {
     <>
       <div className={BoardClasses["flxrow"]}>
         {/* Game Cards */}
-        {imgGroup1 &&
-          imgGroup1.map((userObj) => (
-            <Cards compare={compare} key={userObj.email} img={userObj.picture.large} id={userObj.email}/>
-          ))}
+        {imgGroup &&
+          imgGroup.map((userObj) => 
+            <Cards compare={compare} key={userObj.email} img={userObj.picture.large} id={userObj.email} test={test} />
+          
+          )}
       </div>
       
     </>
