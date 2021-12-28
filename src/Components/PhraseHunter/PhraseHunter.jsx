@@ -1,12 +1,13 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PhraseHunterCss from "./PhraseHunter.module.css";
-const fullHeart = require("../../Shared/images/matchGame/outline_favorite_black_24dp2x.png");
-const emptyHeart = require("../../Shared/images/matchGame/outline_favorite_border_black_24dp2x.png");
+import Heart from "./Heart";
 
 const PhraseHunter = () => {
   const [gameOver, setGameOver] = useState(false);
   const [gameStart, setGameStart] = useState(false);
+  const [gameScore, setGameScore] = useState({
+    fullHearts: [true, true, true, true, false],
+  });
 
   return (
     <div className="main-container">
@@ -80,21 +81,9 @@ const PhraseHunter = () => {
 
           <div id="scoreboard" className="section">
             <ul className="d-flex">
-              <li className="tries">
-                <img className="hearticon" src={fullHeart} alt="Heart Icon" />
-              </li>
-              <li className="tries">
-                <img className="hearticon" src={fullHeart} alt="Heart Icon" />
-              </li>
-              <li className="tries">
-                <img className="hearticon" src={fullHeart} alt="Heart Icon" />
-              </li>
-              <li className="tries">
-                <img className="hearticon" src={fullHeart} alt="Heart Icon" />
-              </li>
-              <li className="tries">
-                <img className="hearticon" src={fullHeart} alt="Heart Icon" />
-              </li>
+              {gameScore.fullHearts.map((fullHeart, index) => (
+                <Heart key={index} isFull={fullHeart} />
+              ))}
             </ul>
           </div>
         </div>
