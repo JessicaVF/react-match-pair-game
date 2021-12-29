@@ -4,10 +4,25 @@ import Heart from "./Heart";
 
 const PhraseHunter = () => {
   const [gameOver, setGameOver] = useState(false);
+  const [gameQuote, setGameQuote] = useState("life is beautiful");
   const [gameStart, setGameStart] = useState(false);
   const [gameScore, setGameScore] = useState({
     fullHearts: [true, true, true, true, false],
   });
+
+  useEffect(() => {
+    fetch("https://type.fit/api/quotes")
+      .then((response) => response.json())
+      .then((data) => {
+        setGameQuote(randomQuote(data));
+      });
+  }, []);
+
+  const randomQuote = (arr) => {
+    const number = Math.floor(Math.random() * 1500 + 1);
+    const quote = arr[number].text;
+    return quote;
+  };
 
   return (
     <div className="main-container">
@@ -39,7 +54,7 @@ const PhraseHunter = () => {
           </div>
 
           <div id="phrase" className="section">
-            <ul>This is the secret phrase to hide and create dynamically</ul>
+            <h3>{gameQuote}</h3>
           </div>
 
           <div id="qwerty" className="section">
