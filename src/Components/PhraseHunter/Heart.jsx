@@ -4,9 +4,11 @@ const emptyHeart = require("../../Shared/images/matchGame/outline_favorite_borde
 
 const Heart = (props) => {
   const [isFullHeart] = useState(props.isFull);
+  const imgSrc = isFullHeart ? fullHeart : emptyHeart;
+
   return (
     <li>
-      <img src={isFullHeart ? fullHeart : emptyHeart} alt="heart" />
+      <img src={imgSrc} alt="heart" />
     </li>
   );
 };
