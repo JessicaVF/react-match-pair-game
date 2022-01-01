@@ -39,7 +39,7 @@ const PhraseHunter = () => {
     const index = count > 0 && count - 1;
     let tempArr = [...gameScore];
     tempArr[index] = false;
-    setGameScore(tempArr);
+    setGameScore([...tempArr]);
 
     count > 0 &&
       setCount(() => {
@@ -253,9 +253,10 @@ const PhraseHunter = () => {
 
           <div id="scoreboard" className="section">
             <ul className="d-flex">
-              {gameScore.map((heartBool, index) => (
-                <Heart key={index} isFull={heartBool} />
-              ))}
+              {gameScore &&
+                gameScore.map((heartBool, index) => (
+                  <Heart key={index} isFull={heartBool} />
+                ))}
             </ul>
           </div>
         </div>
