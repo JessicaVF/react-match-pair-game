@@ -41,18 +41,22 @@ const CardsBoard = () => {
     return array;
   }
 
-  // Function compare: We have a external variable that will save the value of the first flipped card
+  // Function compare: We have, card1, a external variable that will save the value of the first flipped card
   let card1;
+  let test ="";
     
   const compare = (cardId) => { 
     
+    //If card1 is undefined it means is the start of a turn, so we assign the value cardId to card1
     if(card1 == undefined){
       card1 = cardId;
+      test =cardId;
     }
+    // Else, we compare the value of the first card (save it in card1) with the current card (cardId)
     else{
       if (card1 == cardId){
         console.log("they match!");
-        
+        // We remove the cards that were found
         removeCards(cardId);
       }
       // to do : flip down cards
@@ -62,17 +66,20 @@ const CardsBoard = () => {
   }
 const removeCards =(cardId) => {
   
-  for (let card of imgGroup){
-    console.log("cardId", cardId);
-    console.log("cardEMAIL", card.email);
-    if(card.email == cardId){
-      console.log("here");
-      // setImgGroup(imgGroup.splice(imgGroup.indexOf(card), 1));
+  
+  let newImgGroup = [];
+  for(let card of imgGroup){
+    let arrayForModification = imgGroup;
+    if(card.email != cardId){
+    newImgGroup.push(arrayForModification.splice(imgGroup.indexOf(card), 1));
     }
-  } 
+  }
+  // setImgGroup(newImgGroup);
   
-  
+// imgGroup.filter(userObj => userObj.email != test).map( filteredObj => <Cards compare={compare} key={userObj.email} img={userObj.picture.large} id={userObj.email} />)
+
 }
+
   //return jsx
   return (
     <>
