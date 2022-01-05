@@ -8,10 +8,6 @@ const CardsBoard = () => {
   const [imgGroup, setImgGroup] = useState(null);
   const [count, setCount] = useState(0);
 
-  setCount(() => {
-    return count + 1;
-  });
-
   useEffect(() => {
     fetch("https://randomuser.me/api/?results=10")
       .then((res) => res.json())
