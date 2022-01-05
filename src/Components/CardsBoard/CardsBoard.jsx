@@ -43,14 +43,11 @@ const CardsBoard = () => {
 
   // Function compare: We have, card1, a external variable that will save the value of the first flipped card
   let card1;
-  let test ="";
-    
   const compare = (cardId) => { 
     
     //If card1 is undefined it means is the start of a turn, so we assign the value cardId to card1
     if(card1 == undefined){
       card1 = cardId;
-      test =cardId;
     }
     // Else, we compare the value of the first card (save it in card1) with the current card (cardId)
     else{
@@ -66,18 +63,14 @@ const CardsBoard = () => {
   }
 const removeCards =(cardId) => {
   
-  
   let newImgGroup = [];
   for(let card of imgGroup){
-    let arrayForModification = imgGroup;
     if(card.email != cardId){
-    newImgGroup.push(arrayForModification.splice(imgGroup.indexOf(card), 1));
+    newImgGroup.push(card);
     }
   }
-  // setImgGroup(newImgGroup);
+  setImgGroup(newImgGroup);
   
-// imgGroup.filter(userObj => userObj.email != test).map( filteredObj => <Cards compare={compare} key={userObj.email} img={userObj.picture.large} id={userObj.email} />)
-
 }
 
   //return jsx
@@ -87,7 +80,7 @@ const removeCards =(cardId) => {
         {/* Game Cards */}
         {imgGroup &&
           imgGroup.map((userObj) => 
-            <Cards compare={compare} key={userObj.email} img={userObj.picture.large} id={userObj.email} />
+            <Cards compare={compare} key={userObj.id} img={userObj.picture.large} id={userObj.email} />
           
           )}
       </div>
