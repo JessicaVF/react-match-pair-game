@@ -7,6 +7,7 @@ import BoardClasses from "./CardsBoard.module.css";
 const CardsBoard = () => {
   const [imgGroup, setImgGroup] = useState(null);
   const [count, setCount] = useState(0);
+  const [toUnreveal, setToUnreveal] = useState([]);
 
   useEffect(() => {
     fetch("https://randomuser.me/api/?results=2")
@@ -54,16 +55,18 @@ const CardsBoard = () => {
     else {
       if (card1 == cardId) {
         console.log("they match!");
-        // In one version We remove the cards that were found
-        // removeCards(cardId);
+              // In one version We remove the cards that were found
+              // removeCards(cardId);
         // In another version (current) we block the matched cards
-        blockCards(cardId);
+        blockMatchedCards(cardId);
       }
       else{
-        // to do : flip down cards
+        flipDown(card1, cardId);
+        
       }
-      
       card1 = undefined;
+      // setToUnreveal(arr => [...arr, ...[]])
+      
     }
   };
   const removeCards = (cardId) => {
@@ -84,7 +87,7 @@ const CardsBoard = () => {
         //   })
         // })
   };
-  const blockCards= (cardId) =>{
+  const blockMatchedCards = (cardId) =>{
     setImgGroup(prevState =>{
       return prevState.map( card =>{
         if(card.email == cardId){
@@ -95,6 +98,11 @@ const CardsBoard = () => {
         }
       })
     })
+  }
+  const flipDown = (card1, cardId) =>{
+    let cardsToUnreveal = [card1, cardId];
+    setTimeout(() => { setToUnreveal(arr => [...arr, ...cardsToUnreveal])}, 3000);
+    
   }
 
   //return jsx
@@ -110,6 +118,7 @@ const CardsBoard = () => {
               img={userObj.picture.large}
               id={userObj.email}
               matched={userObj.matched}
+              isToFlip={toUnreveal}
             />
           ))}
       </div>

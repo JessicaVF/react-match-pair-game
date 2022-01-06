@@ -5,52 +5,80 @@ const flower = require("../../Shared/images/matchGame/flower-bw.jpeg");
 const Cards = (props) => {
   //logic
   
-  const [cardIsFlipped, setCardIsFlipped] = useState(false);
+  const [cardIsRevealed, setCardIsRevealed] = useState(false);
   console.log(props.id);
-  console.log(props.matched);
-  const handleCardIsFlipped = () => {
+  if(props.isToFlip.includes(props.id)){
+    console.log("the card", props.id,"is:", props.isToFlip.includes(props.id));
+  }
+  
+  const handleCardIsRevealed = () => {
     
-    const cardBool = !cardIsFlipped;
-    setCardIsFlipped(cardBool);
+    const cardBool = !cardIsRevealed;
+    setCardIsRevealed(cardBool);
   };
   
   
   //return jsx
   return (
     <div className={cardClasses.matchCardBorder}>
-    { props.matched ?
-      (
-        <div className={cardClasses.matchCardFront}>
-          <img src={props.img} alt="" />
-        </div>
-      )
-      :
-      (cardIsFlipped ? 
+      {
+        (props.matched) || (cardIsRevealed && !props.isToFlip.includes(props.id)) ?
         (
-          <div
-            className={cardClasses.matchCardFront}
-            onClick={() => {
-              handleCardIsFlipped();
-            }}
-          >
+          <div className={cardClasses.matchCardFront}>
             <img src={props.img} alt="" />
           </div>
-        ) : 
+        )
+        :
         (
           <div
             className={cardClasses.matchCardBack}
             onClick={() => {
-              handleCardIsFlipped();
+              handleCardIsRevealed();
               props.compare(props.id)
             }}
           >
             <img src={flower} alt="black and white flower" />
           </div>
         )
-      )
-    }
+      }
     </div>
-  );
+
+  )
+//   return (
+//     <div className={cardClasses.matchCardBorder}>
+//     { props.matched ?
+//       (
+//         <div className={cardClasses.matchCardFront}>
+//           <img src={props.img} alt="" />
+//         </div>
+//       )
+//       :
+//       (cardIsRevealed ? 
+//         (
+//           <div
+//             className={cardClasses.matchCardFront}
+//             onClick={() => {
+//               handleCardIsRevealed();
+//             }}
+//           >
+//             <img src={props.img} alt="" />
+//           </div>
+//         ) : 
+//         (
+//           <div
+//             className={cardClasses.matchCardBack}
+//             onClick={() => {
+//               handleCardIsRevealed();
+//               props.compare(props.id)
+//             }}
+//           >
+//             <img src={flower} alt="black and white flower" />
+//           </div>
+//         )
+//       )
+//     }
+//     </div>
+//   );
 };
 
 export default Cards;
