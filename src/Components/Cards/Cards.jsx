@@ -4,15 +4,16 @@ const flower = require("../../Shared/images/matchGame/flower-bw.jpeg");
 
 const Cards = (props) => {
   //logic
-
-  const [cardIsFlipped, setCardIsFlipped] = useState(false);
   
+  const [cardIsFlipped, setCardIsFlipped] = useState(false);
+  console.log(props.id);
   const handleCardIsFlipped = () => {
+    
     const cardBool = !cardIsFlipped;
     setCardIsFlipped(cardBool);
     
   };
-
+  
   
   //return jsx
   return (
@@ -35,7 +36,9 @@ const Cards = (props) => {
             handleCardIsFlipped();
             props.compare(props.id)
           }}>
-          <img src={flower} alt="black and white flower" />
+          
+            <img src={flower} alt="black and white flower" />
+          
         </div>
       )}
     </div>

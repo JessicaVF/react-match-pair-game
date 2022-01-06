@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, prevState } from "react";
 import Cards from "../Cards/Cards";
 import BoardClasses from "./CardsBoard.module.css";
 
@@ -56,11 +56,13 @@ const CardsBoard = () => {
         // We remove the cards that were found
         removeCards(cardId);
       }
-      // to do : flip down cards
-        card1 = undefined;
+      else{
+        // to do (pending) : flip down cards
+      }
+      card1 = undefined;
     }
     
-  }
+}
 const removeCards =(cardId) => {
   
   let newImgGroup = [];
@@ -69,8 +71,7 @@ const removeCards =(cardId) => {
     newImgGroup.push(card);
     }
   }
-  setImgGroup(newImgGroup);
-  
+ setImgGroup(newImgGroup);
 }
 
   //return jsx
