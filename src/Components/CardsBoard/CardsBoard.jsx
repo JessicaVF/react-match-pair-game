@@ -12,7 +12,8 @@ const CardsBoard = () => {
     fetch("https://randomuser.me/api/?results=2")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.results);
+        // We add the propierty "matched" to the cards, they all start in "false"
+        data.results.map(card => card.matched = false);
         setImgGroup(() => {
           const newArr = shuffle([...data.results, ...data.results]);
           return [...newArr];
@@ -56,7 +57,7 @@ const CardsBoard = () => {
         // In one version We remove the cards that were found
         // removeCards(cardId);
         // In another version (current) we block the matched cards
-        blockCards();
+        blockCards(cardId);
       }
       else{
         // to do : flip down cards
@@ -83,8 +84,17 @@ const CardsBoard = () => {
         //   })
         // })
   };
-  const blockCards= () =>{
-
+  const blockCards= (cardId) =>{
+    setImgGroup(prevState =>{
+      return prevState.map( card =>{
+        if(card.email == cardId){
+          return {...card, matched: true}
+        }
+        else{
+          return card
+        }
+      })
+    })
   }
 
   //return jsx
@@ -99,6 +109,7 @@ const CardsBoard = () => {
               key={index}
               img={userObj.picture.large}
               id={userObj.email}
+              matched={userObj.matched}
             />
           ))}
       </div>

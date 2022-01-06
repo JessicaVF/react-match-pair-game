@@ -7,6 +7,7 @@ const Cards = (props) => {
   
   const [cardIsFlipped, setCardIsFlipped] = useState(false);
   console.log(props.id);
+  console.log(props.matched);
   const handleCardIsFlipped = () => {
     
     const cardBool = !cardIsFlipped;
@@ -17,27 +18,37 @@ const Cards = (props) => {
   //return jsx
   return (
     <div className={cardClasses.matchCardBorder}>
-      {cardIsFlipped ? (
-        <div
-          className={cardClasses.matchCardFront}
-          onClick={() => {
-            handleCardIsFlipped();
-          }}
-        >
+    { props.matched ?
+      (
+        <div className={cardClasses.matchCardFront}>
           <img src={props.img} alt="" />
         </div>
-      ) : (
-        <div
-          className={cardClasses.matchCardBack}
-          onClick={() => {
-            handleCardIsFlipped();
-            props.compare(props.id)
-          }}>
-          
+      )
+      :
+      (cardIsFlipped ? 
+        (
+          <div
+            className={cardClasses.matchCardFront}
+            onClick={() => {
+              handleCardIsFlipped();
+            }}
+          >
+            <img src={props.img} alt="" />
+          </div>
+        ) : 
+        (
+          <div
+            className={cardClasses.matchCardBack}
+            onClick={() => {
+              handleCardIsFlipped();
+              props.compare(props.id)
+            }}
+          >
             <img src={flower} alt="black and white flower" />
-          
-        </div>
-      )}
+          </div>
+        )
+      )
+    }
     </div>
   );
 };
