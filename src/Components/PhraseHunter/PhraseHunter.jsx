@@ -4,7 +4,27 @@ import Heart from "./Heart";
 
 const PhraseHunter = () => {
   const [gameOver, setGameOver] = useState(false);
-  const [gameQuote, setGameQuote] = useState("life is beautiful");
+  const [gameQuote, setGameQuote] = useState([
+    "l",
+    "i",
+    "f",
+    "e",
+    " ",
+    "i",
+    "s",
+    " ",
+    "b",
+    "e",
+    "a",
+    "u",
+    "t",
+    "i",
+    "f",
+    "u",
+    "l",
+    ".",
+  ]);
+
   const [gameStart, setGameStart] = useState(false);
 
   const [gameScore, setGameScore] = useState([true, true, true, true, true]);
@@ -16,7 +36,7 @@ const PhraseHunter = () => {
     fetch("https://type.fit/api/quotes")
       .then((response) => response.json())
       .then((data) => {
-        setGameQuote(randomQuote(data));
+        setGameQuote(handleStrToArr(randomQuote(data)));
       });
   }, []);
 
@@ -28,11 +48,21 @@ const PhraseHunter = () => {
 
   const handleGameStart = () => {
     setCount(5);
+    setGameScore([true, true, true, true, true]);
 
-    // for (let i = 0; i < gameQuote.length; i++) {
-    //   const element = array[i];
-    // }
     setGameStart(true);
+  };
+
+  const handleStrToArr = (str) => {
+    let tempArr = [];
+    for (let i = 0; i < str.length; i++) {
+      tempArr.push(str[i]);
+    }
+    return tempArr;
+  };
+  const handleCharAzTest = (char) => {
+    const phraseRegex = /[A-Za-z]/;
+    return phraseRegex.test(char);
   };
 
   const handleGameScore = () => {
@@ -80,8 +110,24 @@ const PhraseHunter = () => {
             <h2 className="header">Phrase Hunter</h2>
           </div>
 
-          <div id="phrase" className="section">
-            <h3>{gameQuote}</h3>
+          {/* GAME QUOTE SECTION */}
+          <div id="phrase" className="section ">
+            {/* use a map here to create JSX of for Phrase with <ul> <li> */}
+            <ul className="d-flex flex-wrap p-3">
+              {gameQuote &&
+                gameQuote.map((char, index) => (
+                  <li
+                    key={index}
+                    className={
+                      handleCharAzTest(char)
+                        ? PhraseHunterCss.hiddenColor
+                        : PhraseHunterCss.showTrueColors
+                    }
+                  >
+                    {char}
+                  </li>
+                ))}
+            </ul>
           </div>
 
           <div id="qwerty" className="section">

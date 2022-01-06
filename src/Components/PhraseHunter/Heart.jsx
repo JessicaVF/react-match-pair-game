@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 const fullHeart = require("../../Shared/images/matchGame/outline_favorite_black_24dp2x.png");
 const emptyHeart = require("../../Shared/images/matchGame/outline_favorite_border_black_24dp2x.png");
 

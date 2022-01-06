@@ -2,25 +2,25 @@ import React, { useEffect, useState, prevState } from "react";
 import Cards from "../Cards/Cards";
 import BoardClasses from "./CardsBoard.module.css";
 
-
-
 // We take the photos from an API generator of user data: https://randomuser.me/api/?results=5
 
 const CardsBoard = () => {
   const [imgGroup, setImgGroup] = useState(null);
-  
-  
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
     fetch("https://randomuser.me/api/?results=2")
       .then((res) => res.json())
       .then((data) => {
-        
-        setImgGroup(shuffle([...data.results, ...data.results ]));
-        
+        console.log(data.results);
+        setImgGroup(() => {
+          const newArr = shuffle([...data.results, ...data.results]);
+          return [...newArr];
+        });
       });
   }, []);
 
-  // Stack overflow :)
+  //mix array results Stack overflow :)
   function shuffle(array) {
     let currentIndex = array.length,
       randomIndex;
@@ -43,36 +43,49 @@ const CardsBoard = () => {
 
   // Function compare: We have, card1, a external variable that will save the value of the first flipped card
   let card1;
-  const compare = (cardId) => { 
-    
+
+  const compare = (cardId) => {
     //If card1 is undefined it means is the start of a turn, so we assign the value cardId to card1
-    if(card1 == undefined){
+    if (card1 == undefined) {
       card1 = cardId;
     }
     // Else, we compare the value of the first card (save it in card1) with the current card (cardId)
-    else{
-      if (card1 == cardId){
+    else {
+      if (card1 == cardId) {
         console.log("they match!");
-        // We remove the cards that were found
-        removeCards(cardId);
+        // In one version We remove the cards that were found
+        // removeCards(cardId);
+        // In another version (current) we block the matched cards
+        blockCards();
       }
       else{
-        // to do (pending) : flip down cards
+        // to do : flip down cards
       }
+      
       card1 = undefined;
     }
-    
-}
-const removeCards =(cardId) => {
-  
-  let newImgGroup = [];
-  for(let card of imgGroup){
-    if(card.email != cardId){
-    newImgGroup.push(card);
-    }
+  };
+  const removeCards = (cardId) => {
+    // let newImgGroup = [];
+    // for (let card of imgGroup) {
+    //   if (card.email != cardId) {
+    //     newImgGroup.push(card);
+    //   }
+    // }
+    // to do (pending): update ImgGroup in a way that we don't create a "valley effect"
+        //first try (failed): setImgGroup(newImgGroup);
+        // second try (failed):
+        // setImgGroup(prevCards => {
+        //   return prevCards.map(card =>{
+        //     if (card.email != cardId){
+        //       return card;
+        //     }
+        //   })
+        // })
+  };
+  const blockCards= () =>{
+
   }
- setImgGroup(newImgGroup);
-}
 
   //return jsx
   return (
@@ -80,12 +93,15 @@ const removeCards =(cardId) => {
       <div className={BoardClasses["flxrow"]}>
         {/* Game Cards */}
         {imgGroup &&
-          imgGroup.map((userObj) => 
-            <Cards compare={compare} key={userObj.id} img={userObj.picture.large} id={userObj.email} />
-          
-          )}
+          imgGroup.map((userObj, index) => (
+            <Cards
+              compare={compare}
+              key={index}
+              img={userObj.picture.large}
+              id={userObj.email}
+            />
+          ))}
       </div>
-      
     </>
   );
 };
