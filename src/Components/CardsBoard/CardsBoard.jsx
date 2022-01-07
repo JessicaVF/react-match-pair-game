@@ -7,10 +7,10 @@ import BoardClasses from "./CardsBoard.module.css";
 const CardsBoard = () => {
   const [imgGroup, setImgGroup] = useState(null);
   const [count, setCount] = useState(0);
-  const [toUnreveal, setToUnreveal] = useState([]);
-
+  const [toUnreveal, setToUnreveal] = useState(["a", "b"]);
+  console.log("state of toUnreveal:", toUnreveal);
   useEffect(() => {
-    fetch("https://randomuser.me/api/?results=2")
+    fetch("https://randomuser.me/api/?results=3")
       .then((res) => res.json())
       .then((data) => {
         // We add the propierty "matched" to the cards, they all start in "false"
@@ -67,6 +67,7 @@ const CardsBoard = () => {
       card1 = undefined;
       // setToUnreveal(arr => [...arr, ...[]])
       
+      
     }
   };
   const removeCards = (cardId) => {
@@ -100,9 +101,13 @@ const CardsBoard = () => {
     })
   }
   const flipDown = (card1, cardId) =>{
-    let cardsToUnreveal = [card1, cardId];
-    setTimeout(() => { setToUnreveal(arr => [...arr, ...cardsToUnreveal])}, 3000);
     
+    let cardsToUnreveal = [card1, cardId];
+    setTimeout(() => { setToUnreveal(arr => [...arr = cardsToUnreveal])}, 3000);
+    let t = ["c", "d"];
+    setToUnreveal(arr => arr = t);
+    setTimeout(() => { setToUnreveal( arr => arr = t)}, 6000);
+    console.log("state of toUnreveal when we exit to flip down:", toUnreveal);
   }
 
   //return jsx
