@@ -5,22 +5,51 @@ import BoardClasses from "./CardsBoard.module.css";
 // We take the photos from an API generator of user data: https://randomuser.me/api/?results=5
 
 const CardsBoard = () => {
-  const [imgGroup, setImgGroup] = useState(null);
-  const [card1, setCard1] = useState(undefined);
+
+  /* We start setting some hooks:
   
+    const [example, setExample] = useState(null);
+
+  More or less: this hook thing can be understood like variable, and a special function
+    to modify that variable instantly
+    
+  Note: useState() does not has to be "null", can be "undefined", 0, booleans or else.
+  */
+
+  //hook to represent the deck of cards
+  const [imgGroup, setImgGroup] = useState(null);
+
+  //hook to save the first revealed card of each turn
+  const [card1, setCard1] = useState(undefined);
+
+  /* We use useEffect() to launch the code inside it; because we add an array in the end,as second argument
+  useEffect() will launch only one time.
+  */
 useEffect(() => {
+    // We fetch a colection of objects from a API, that offer "users" (with photos and other useful data)
     fetch("https://randomuser.me/api/?results=2")
       .then((res) => res.json())
       .then((data) => {
         
+
+        // We save the results
         let setOne = data.results;
+        /* We deep clone the save results. Deep clone means we are really creating a copy, a new object, 
+        and not just coping the reference. This will allow work with each set of cards in individual way
+        */
         let setTwo = JSON.parse(JSON.stringify(setOne));
         
+        /* We add some new propierties to the cards in each set
+        Note: the cards are almost the same in both sets, except for the "uniqueId", that's  the reason why we have
+        to work with them i separate sets */
         setOne.map(card => {card.matched = false; card.revealed = false; card.uniqueId = card.email + 1});
         setTwo.map(card => {card.matched = false; card.revealed = false; card.uniqueId = card.email + 2});
+
+        // We fuse both sets and suffle
         let finalSet = [...setOne, ...setTwo];
         finalSet = shuffle(finalSet);
-                
+        
+        // we assign the final set to setImgGroup, the hook-variable we created before to represent the deck
         setImgGroup(() => {
           return [...finalSet];
         });
@@ -110,14 +139,14 @@ useEffect(() => {
     setTimeout(() => { setImgGroup(prevState =>{
       return prevState.map( card =>{
         if(card.email == cardId || card.email == card1 ){
-          // the attribute "matched" will be turned into "true" for the matched cards, that will lock them in the component "cards" 
+          // the attribute "revealed" will be turned into "false" for the cards revealed and no matched in this turn 
           return {...card, revealed: false}
         }
         else{
           return card
         }
       })
-    })}, 3000);
+    })}, 1000);
   }
 
   //return jsx

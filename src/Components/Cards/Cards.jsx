@@ -4,7 +4,6 @@ const flower = require("../../Shared/images/matchGame/flower-bw.jpeg");
 
 const Cards = (props) => {
   //logic
-  console.log("uniqueId :", props.uniqueId);
   console.log("idToCompare :", props.idToCompare);
   //return jsx
   return (
