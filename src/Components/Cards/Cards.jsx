@@ -5,20 +5,14 @@ const flower = require("../../Shared/images/matchGame/flower-bw.jpeg");
 const Cards = (props) => {
   //logic
   
-  const [cardIsRevealed, setCardIsRevealed] = useState(false);
-  console.log(props.id);
-
+  // console.log(props.matched);
+  console.log("uniqueId :", props.uniqueId);
   
-  const handleCardIsRevealed = () => {
-    let cardBool = !cardIsRevealed;
-    setCardIsRevealed(cardBool);
-  };
-
   //return jsx
   return (
     <div className={cardClasses.matchCardBorder}>
       {
-        (props.matched) || (cardIsRevealed && !props.isToFlip.includes(props.id)) ?
+        (props.matched) || (props.revealed)  ?
         (
           <div className={cardClasses.matchCardFront}>
             <img src={props.img} alt="" />
@@ -29,8 +23,8 @@ const Cards = (props) => {
           <div
             className={cardClasses.matchCardBack}
             onClick={() => {
-              handleCardIsRevealed();
-              props.compare(props.id)
+              // handleCardIsRevealed();
+              props.compare(props.idToCompare, props.uniqueId)
             }}
           >
             <img src={flower} alt="black and white flower" />
