@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 import cardClasses from "./Cards.module.css";
 const flower = require("../../Shared/images/matchGame/flower-bw.jpeg");
 
@@ -7,17 +7,13 @@ const Cards = (props) => {
   
   const [cardIsRevealed, setCardIsRevealed] = useState(false);
   console.log(props.id);
-  if(props.isToFlip.includes(props.id)){
-    console.log("the card", props.id,"is:", props.isToFlip.includes(props.id));
-  }
+
   
   const handleCardIsRevealed = () => {
-    
-    const cardBool = !cardIsRevealed;
+    let cardBool = !cardIsRevealed;
     setCardIsRevealed(cardBool);
   };
-  
-  
+
   //return jsx
   return (
     <div className={cardClasses.matchCardBorder}>

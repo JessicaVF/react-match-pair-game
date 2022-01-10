@@ -7,14 +7,15 @@ import BoardClasses from "./CardsBoard.module.css";
 const CardsBoard = () => {
   const [imgGroup, setImgGroup] = useState(null);
   const [count, setCount] = useState(0);
-  const [toUnreveal, setToUnreveal] = useState(["a", "b"]);
+  const [toUnreveal, setToUnreveal] = useState([]);
   console.log("state of toUnreveal:", toUnreveal);
+ 
   useEffect(() => {
     fetch("https://randomuser.me/api/?results=3")
       .then((res) => res.json())
       .then((data) => {
         // We add the propierty "matched" to the cards, they all start in "false"
-        data.results.map(card => card.matched = false);
+        data.results.map(card => {card.matched = false; card.revealed = false});
         setImgGroup(() => {
           const newArr = shuffle([...data.results, ...data.results]);
           return [...newArr];
@@ -61,13 +62,11 @@ const CardsBoard = () => {
         blockMatchedCards(cardId);
       }
       else{
+        // If the player did'nt got a match we flip down the cards, passing their ids
         flipDown(card1, cardId);
         
       }
       card1 = undefined;
-      // setToUnreveal(arr => [...arr, ...[]])
-      
-      
     }
   };
   const removeCards = (cardId) => {
@@ -88,10 +87,14 @@ const CardsBoard = () => {
         //   })
         // })
   };
-  const blockMatchedCards = (cardId) =>{
+  // Function that block the cards already matched. It takes the cardId (that is the id for the two matched cards)
+  const blockMatchedCards = (cardId) =>
+  {
+    // We use the hook setImgGroup with map to update the deck of cards
     setImgGroup(prevState =>{
       return prevState.map( card =>{
         if(card.email == cardId){
+          // the attribute "matched" will be turned into "true" for the matched cards, that will lock them in the component "cards" 
           return {...card, matched: true}
         }
         else{
@@ -101,13 +104,21 @@ const CardsBoard = () => {
     })
   }
   const flipDown = (card1, cardId) =>{
-    
+    // We create an array that will rewrite the state "toUnreveal"
+  
     let cardsToUnreveal = [card1, cardId];
-    setTimeout(() => { setToUnreveal(arr => [...arr = cardsToUnreveal])}, 3000);
-    let t = ["c", "d"];
-    setToUnreveal(arr => arr = t);
-    setTimeout(() => { setToUnreveal( arr => arr = t)}, 6000);
-    console.log("state of toUnreveal when we exit to flip down:", toUnreveal);
+    // We use a timer so the flip down don't happen before the user can actually see the cards. We allow 3 seconds of wait
+    setTimeout(() => { setToUnreveal(arr => arr = cardsToUnreveal)}, 3000);
+    
+    
+    // To do: put this part in another function ?? or optimaze this so it become a callback of the first setTimeout
+
+    // We clear the state to prepare it to the next round, we give this part  6 seconds of wait to avoid it start before the previous line finish
+    // let clear = ["c"];
+    setTimeout(() => { setToUnreveal( arr => arr = [])}, 6000);
+    
+    
+  
   }
 
   //return jsx
@@ -124,6 +135,8 @@ const CardsBoard = () => {
               id={userObj.email}
               matched={userObj.matched}
               isToFlip={toUnreveal}
+              revealed={userObj.revealed}
+
             />
           ))}
       </div>
