@@ -15,20 +15,14 @@ useEffect(() => {
         
         let setOne = data.results;
         let setTwo = JSON.parse(JSON.stringify(setOne));
-        let randomNumberOne = 1;
-        setOne.map(card => {card.matched = false; card.revealed = false; card.uniqueId = card.email + randomNumberOne});
-        console.log("setOne:", setOne);
         
-        let randomNumberTwo = 2;
-        setTwo.map(card => {card.matched = false; card.revealed = false; card.uniqueId = card.email + randomNumberTwo});
-        console.log("setTwo:", setTwo);
-
-        let finalSet = [...setOne, ...setTwo]
-        console.log("finalSet:", finalSet);
-        const newArr = shuffle(finalSet);
+        setOne.map(card => {card.matched = false; card.revealed = false; card.uniqueId = card.email + 1});
+        setTwo.map(card => {card.matched = false; card.revealed = false; card.uniqueId = card.email + 2});
+        let finalSet = [...setOne, ...setTwo];
+        finalSet = shuffle(finalSet);
                 
         setImgGroup(() => {
-          return [...newArr];
+          return [...finalSet];
         });
       });
   }, []);
