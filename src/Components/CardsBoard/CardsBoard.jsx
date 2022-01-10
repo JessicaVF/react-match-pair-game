@@ -6,9 +6,10 @@ import BoardClasses from "./CardsBoard.module.css";
 
 const CardsBoard = () => {
   const [imgGroup, setImgGroup] = useState(null);
+  const [card1, setCard1] = useState(undefined);
   
 useEffect(() => {
-    fetch("https://randomuser.me/api/?results=1")
+    fetch("https://randomuser.me/api/?results=2")
       .then((res) => res.json())
       .then((data) => {
         
@@ -26,7 +27,7 @@ useEffect(() => {
       });
   }, []);
 
-  //mix array results Stack overflow :)
+  //mix array results (code from Stack overflow) :)
   function shuffle(array) {
     let currentIndex = array.length,
       randomIndex;
@@ -47,16 +48,14 @@ useEffect(() => {
     return array;
   }
 
-  // Function compare: We have, card1, a external variable that will save the value of the first flipped card
-  let card1;
+  // Function compare: We have, card1, a state that will save the value of the first flipped card
+  
 
   const compare = (idToCompare) => {
     
     //If card1 is undefined it means is the start of a turn, so we assign the value idToCompare to card1
     if (card1 == undefined) {
-      
-      card1 = idToCompare;
-      
+      setCard1(idToCompare)
     }
     // Else, we compare the value of the first card (save it in card1) with the current card (idToCompare)
     else {
@@ -69,19 +68,19 @@ useEffect(() => {
         flipDown(card1, idToCompare);
       }
       // We reset card1 for the next round
-      card1 = undefined;
+      setCard1(undefined);
     }
   };
 
   
   const reveal = (uniqueId) =>
   {
-    console.log("in revealed");
+  
     // We use the hook setImgGroup with map to update the deck of cards
     setImgGroup(prevState =>{
       return prevState.map( card =>{
         if(card.uniqueId == uniqueId){
-          // the attribute "matched" will be turned into "true" for the matched cards, that will lock them in the component "cards" 
+          // the attribute "revealed" will be turned into "true" for the matched cards, that will show them to the player 
           return {...card, revealed: true}
         }
         else{
@@ -94,7 +93,6 @@ useEffect(() => {
   // Function that block the cards already matched. It takes the cardId (that is the id for the two matched cards)
   const blockMatchedCards = (cardId) =>
   {
-    console.log("in matched");
     // We use the hook setImgGroup with map to update the deck of cards
     setImgGroup(prevState =>{
       return prevState.map( card =>{
@@ -109,7 +107,17 @@ useEffect(() => {
     })
   }
   const flipDown = (card1, cardId) =>{
-    // setTimeout(() => { setToUnreveal(arr => arr = cardsToUnreveal)}, 3000);
+    setTimeout(() => { setImgGroup(prevState =>{
+      return prevState.map( card =>{
+        if(card.email == cardId || card.email == card1 ){
+          // the attribute "matched" will be turned into "true" for the matched cards, that will lock them in the component "cards" 
+          return {...card, revealed: false}
+        }
+        else{
+          return card
+        }
+      })
+    })}, 3000);
   }
 
   //return jsx
