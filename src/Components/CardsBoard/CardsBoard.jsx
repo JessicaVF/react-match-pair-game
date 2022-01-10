@@ -77,8 +77,9 @@ useEffect(() => {
     return array;
   }
 
-  // Function compare: We have, card1, a state that will save the value of the first flipped card
-  
+ /* Function compare:Here we use card1, the hook-variable that we created at the start of the code,
+  to save the value of the first flipped card at the start of each turn
+ */
 
   const compare = (idToCompare) => {
     
@@ -88,12 +89,13 @@ useEffect(() => {
     }
     // Else, we compare the value of the first card (save it in card1) with the current card (idToCompare)
     else {
+      // If we are talking about the same card we logged and call a function to block them in place
       if (card1 == idToCompare) {
         console.log("they match!");
         blockMatchedCards(idToCompare);
       }
       else{
-        // If the player did'nt got a match we flip down the cards, passing their ids
+        // If the player did'nt got a match: we flip down the cards (we unreveal) passing their ids
         flipDown(card1, idToCompare);
       }
       // We reset card1 for the next round
@@ -101,7 +103,8 @@ useEffect(() => {
     }
   };
 
-  
+  // Function that reveal the cards (show the images to macth)
+  // We use uniqueId to reference the card the user selected to reveal 
   const reveal = (uniqueId) =>
   {
   
@@ -109,7 +112,9 @@ useEffect(() => {
     setImgGroup(prevState =>{
       return prevState.map( card =>{
         if(card.uniqueId == uniqueId){
-          // the attribute "revealed" will be turned into "true" for the matched cards, that will show them to the player 
+          /* The attribute "revealed" will be turned into "true" for the selected card. 
+             This attribute will be use for the child component "Cards" to do the reveal and also unreveal.
+          */
           return {...card, revealed: true}
         }
         else{
@@ -158,13 +163,13 @@ useEffect(() => {
           imgGroup.map((userObj, index) => (
             <Cards
               key={index}
-              compare={compare}
-              revealFunction={reveal}
-              img={userObj.picture.large}
-              matched={userObj.matched}
-              idToCompare={userObj.email}
-              revealed={userObj.revealed}
-              uniqueId={userObj.uniqueId}
+              compare={compare} // We pass the function compare, so the component cards can call it
+              revealFunction={reveal} // We pass the function reveal, so the component cards can call it
+              img={userObj.picture.large} // The pic that will have to be match with it's clone
+              matched={userObj.matched} // The attribute that will block the cards already matched
+              idToCompare={userObj.email} // The id that will be the same between the "original" card and the "clone"
+              revealed={userObj.revealed} // The attribute that will be use to decide if a card gets reveal or not
+              uniqueId={userObj.uniqueId} // The id that difference the clone from the original
             />
           ))}
       </div>
