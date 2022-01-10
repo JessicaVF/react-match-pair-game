@@ -6,10 +6,9 @@ import BoardClasses from "./CardsBoard.module.css";
 
 const CardsBoard = () => {
   const [imgGroup, setImgGroup] = useState(null);
-  const [count, setCount] = useState(0);
-  const [toUnreveal, setToUnreveal] = useState([]);
+  
 useEffect(() => {
-    fetch("https://randomuser.me/api/?results=2")
+    fetch("https://randomuser.me/api/?results=1")
       .then((res) => res.json())
       .then((data) => {
         
@@ -51,49 +50,31 @@ useEffect(() => {
   // Function compare: We have, card1, a external variable that will save the value of the first flipped card
   let card1;
 
-  const compare = (cardId, uniqueId) => {
-    revealed(uniqueId);
-    console.log("in compare");
-    //If card1 is undefined it means is the start of a turn, so we assign the value cardId to card1
+  const compare = (idToCompare) => {
+    
+    //If card1 is undefined it means is the start of a turn, so we assign the value idToCompare to card1
     if (card1 == undefined) {
-      card1 = cardId;
+      
+      card1 = idToCompare;
+      
     }
-    // Else, we compare the value of the first card (save it in card1) with the current card (cardId)
+    // Else, we compare the value of the first card (save it in card1) with the current card (idToCompare)
     else {
-      if (card1 == cardId) {
+      if (card1 == idToCompare) {
         console.log("they match!");
-              // In one version We remove the cards that were found
-              // removeCards(cardId);
-        // In another version (current) we block the matched cards
-        blockMatchedCards(cardId);
+        blockMatchedCards(idToCompare);
       }
       else{
         // If the player did'nt got a match we flip down the cards, passing their ids
-        flipDown(card1, cardId);
-        
+        flipDown(card1, idToCompare);
       }
+      // We reset card1 for the next round
       card1 = undefined;
     }
   };
-  const removeCards = (cardId) => {
-    // let newImgGroup = [];
-    // for (let card of imgGroup) {
-    //   if (card.email != cardId) {
-    //     newImgGroup.push(card);
-    //   }
-    // }
-    // to do (pending): update ImgGroup in a way that we don't create a "valley effect"
-        //first try (failed): setImgGroup(newImgGroup);
-        // second try (failed):
-        // setImgGroup(prevCards => {
-        //   return prevCards.map(card =>{
-        //     if (card.email != cardId){
-        //       return card;
-        //     }
-        //   })
-        // })
-  };
-  const revealed = (uniqueId) =>
+
+  
+  const reveal = (uniqueId) =>
   {
     console.log("in revealed");
     // We use the hook setImgGroup with map to update the deck of cards
@@ -128,21 +109,7 @@ useEffect(() => {
     })
   }
   const flipDown = (card1, cardId) =>{
-    // We create an array that will rewrite the state "toUnreveal"
-  
-    let cardsToUnreveal = [card1, cardId];
-    // We use a timer so the flip down don't happen before the user can actually see the cards. We allow 3 seconds of wait
-    setTimeout(() => { setToUnreveal(arr => arr = cardsToUnreveal)}, 3000);
-    
-    
-    // To do: put this part in another function ?? or optimaze this so it become a callback of the first setTimeout
-
-    // We clear the state to prepare it to the next round, we give this part  6 seconds of wait to avoid it start before the previous line finish
-    // let clear = ["c"];
-    setTimeout(() => { setToUnreveal( arr => arr = [])}, 6000);
-    
-    
-  
+    // setTimeout(() => { setToUnreveal(arr => arr = cardsToUnreveal)}, 3000);
   }
 
   //return jsx
@@ -153,12 +120,12 @@ useEffect(() => {
         {imgGroup &&
           imgGroup.map((userObj, index) => (
             <Cards
-              compare={compare}
               key={index}
+              compare={compare}
+              revealFunction={reveal}
               img={userObj.picture.large}
-              idToCompare={userObj.email}
               matched={userObj.matched}
-              isToFlip={toUnreveal}
+              idToCompare={userObj.email}
               revealed={userObj.revealed}
               uniqueId={userObj.uniqueId}
             />

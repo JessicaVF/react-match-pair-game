@@ -4,10 +4,8 @@ const flower = require("../../Shared/images/matchGame/flower-bw.jpeg");
 
 const Cards = (props) => {
   //logic
-  
-  // console.log(props.matched);
   console.log("uniqueId :", props.uniqueId);
-  
+  console.log("idToCompare :", props.idToCompare);
   //return jsx
   return (
     <div className={cardClasses.matchCardBorder}>
@@ -23,8 +21,9 @@ const Cards = (props) => {
           <div
             className={cardClasses.matchCardBack}
             onClick={() => {
-              // handleCardIsRevealed();
-              props.compare(props.idToCompare, props.uniqueId)
+              
+              props.compare(props.idToCompare, props.uniqueId);
+              props.revealFunction(props.uniqueId);
             }}
           >
             <img src={flower} alt="black and white flower" />
