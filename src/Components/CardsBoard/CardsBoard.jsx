@@ -22,8 +22,11 @@ const CardsBoard = () => {
   //hook to save the first revealed card of each turn
   const [card1, setCard1] = useState(undefined);
 
-  // Hook tha will block the cards to avoid clicking too fast
+  // Hook that will block the cards to avoid clicking too fast
   const [disable, setDisable] = useState(false);
+
+  // Hook to count the turns
+  const [turnCounter, setTurnCounter] = useState(0);
 
   /* We use useEffect() to launch the code inside it; because we add an array in the end,as second argument
   useEffect() will launch only one time.
@@ -105,14 +108,17 @@ useEffect(() => {
         blockMatchedCards(idToCompare);
       }
       else{
+        
         // If the player did'nt got a match: we flip down the cards (we unreveal) passing their ids
         flipDown(card1, idToCompare);
       }
+      // We update the turnCounter (we do this every two clicks, each time a PAIR of cards go reveal)
+      setTurnCounter(turnCounter +1);
       // We reset card1 for the next round
       setCard1(undefined);
       // We unblock the cards to allow the cliking again
-
       setTimeout(() => { setDisable(false)}, 1000);
+      
     }
   };
 
@@ -171,7 +177,11 @@ useEffect(() => {
   return (
     <>
       <div className={BoardClasses["flxrow"]}>
+
+      <p>Turns: {turnCounter}</p>
+      
         {/* Game Cards */}
+        
         {imgGroup &&
           imgGroup.map((userObj, index) => (
             <Cards
