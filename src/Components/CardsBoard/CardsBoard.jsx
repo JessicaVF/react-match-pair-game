@@ -114,9 +114,6 @@ function newGame(){
         console.log("they match!");
         blockMatchedCards(idToCompare);
         setGameOver(gameOver-1);
-        if(gameOver>=0){
-          console.log("end of the game");
-        }
       }
       else{
         
@@ -191,6 +188,7 @@ function newGame(){
 
       <p>Turns: {turnCounter}</p>
       <button onClick={() => newGame()}>New game</button>
+      {gameOver <= 0 ? <p>Game Over !</p> : ""}
         {/* Game Cards */}
         
         {imgGroup &&
