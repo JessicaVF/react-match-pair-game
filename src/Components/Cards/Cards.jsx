@@ -26,6 +26,15 @@ const Cards = (props) => {
           </div>
         )
         :
+        (props.disable) ?
+        (
+          <div
+            className={cardClasses.matchCardBack}
+          >
+            <img src={flower} alt="black and white flower" />
+          </div>
+        )
+        :
         (
           <div
             className={cardClasses.matchCardBack}

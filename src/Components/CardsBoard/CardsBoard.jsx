@@ -22,6 +22,9 @@ const CardsBoard = () => {
   //hook to save the first revealed card of each turn
   const [card1, setCard1] = useState(undefined);
 
+  // Hook tha will block the cards to avoid clicking too fast
+  const [disable, setDisable] = useState(false);
+
   /* We use useEffect() to launch the code inside it; because we add an array in the end,as second argument
   useEffect() will launch only one time.
   */
@@ -77,6 +80,9 @@ useEffect(() => {
     return array;
   }
 
+ 
+
+
  /* Function compare:Here we use card1, the hook-variable that we created at the start of the code,
   to save the value of the first flipped card at the start of each turn
  */
@@ -89,6 +95,10 @@ useEffect(() => {
     }
     // Else, we compare the value of the first card (save it in card1) with the current card (idToCompare)
     else {
+
+      // We disable the cards as we do our evaluations and else, so the user can't get the computer crazy clicking too fast
+      setDisable(true);
+
       // If we are talking about the same card we logged and call a function to block them in place
       if (card1 == idToCompare) {
         console.log("they match!");
@@ -100,6 +110,8 @@ useEffect(() => {
       }
       // We reset card1 for the next round
       setCard1(undefined);
+      // We unblock the cards to allow the cliking again
+      setDisable(false);
     }
   };
 
@@ -170,6 +182,7 @@ useEffect(() => {
               idToCompare={userObj.email} // The id that will be the same between the "original" card and the "clone"
               revealed={userObj.revealed} // The attribute that will be use to decide if a card gets reveal or not
               uniqueId={userObj.uniqueId} // The id that difference the clone from the original
+              disable={disable}
             />
           ))}
       </div>
