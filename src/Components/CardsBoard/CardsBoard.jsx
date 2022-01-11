@@ -184,13 +184,14 @@ function newGame(){
   //return jsx
   return (
     <>
+    
       <div className="container">
-        
-      <p>Turns: {turnCounter}</p>
-      <button onClick={() => newGame()}>New game</button>
-      {gameOver <= 0 ? <p>Game Over !</p> : ""}
-      
-      
+        <div className={BoardClasses["container"]}>
+          <p>Turns: {turnCounter}</p>
+          <button onClick={() => newGame()}>New game</button>
+          {gameOver <= 0 ? <p>Game Over !</p> : ""}
+          <br></br>
+        </div> 
       <div className={BoardClasses["flxrow"]}>
 
       

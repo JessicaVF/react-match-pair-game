@@ -1,8 +1,18 @@
 .flxrow {
   display: flex;
   flex-wrap: wrap;
+  border: solid 2px black;
+  justify-content: center;
 }
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.gameHead {
+  border: solid 2px black;
+  background-color: blueviolet;
   display: flex;
   justify-content: center;
   align-items: center;
