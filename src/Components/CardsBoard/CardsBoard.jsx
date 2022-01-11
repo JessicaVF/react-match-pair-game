@@ -28,6 +28,9 @@ const CardsBoard = () => {
   // Hook to count the turns
   const [turnCounter, setTurnCounter] = useState(0);
 
+  // Hook to detect the end of the game. It will act like a counter, stoping when reach the number equal to the number of cards
+  const [gameOver, setGameOver] = useState();
+
   /* We use useEffect() to launch the code inside it; because we add an array in the end,as second argument
   useEffect() will launch only one time.
   */
@@ -39,9 +42,10 @@ function newGame(){
     setTurnCounter(0);
     setDisable(false);
     setCard1(undefined);
-
+    let n = 2;
+    setGameOver(n);
     // We fetch a colection of objects from a API, that offer "users" (with photos and other useful data)
-    fetch("https://randomuser.me/api/?results=2")
+    fetch("https://randomuser.me/api/?results=" + n)
       .then((res) => res.json())
       .then((data) => 
       {
@@ -89,11 +93,7 @@ function newGame(){
 
     return array;
   }
-
- 
-
-
- /* Function compare:Here we use card1, the hook-variable that we created at the start of the code,
+/* Function compare:Here we use card1, the hook-variable that we created at the start of the code,
   to save the value of the first flipped card at the start of each turn
  */
 
@@ -113,6 +113,10 @@ function newGame(){
       if (card1 == idToCompare) {
         console.log("they match!");
         blockMatchedCards(idToCompare);
+        setGameOver(gameOver-1);
+        if(gameOver>=0){
+          console.log("end of the game");
+        }
       }
       else{
         
