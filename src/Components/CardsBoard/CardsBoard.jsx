@@ -111,7 +111,8 @@ useEffect(() => {
       // We reset card1 for the next round
       setCard1(undefined);
       // We unblock the cards to allow the cliking again
-      setDisable(false);
+
+      setTimeout(() => { setDisable(false)}, 1000);
     }
   };
 
