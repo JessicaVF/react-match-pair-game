@@ -31,13 +31,20 @@ const CardsBoard = () => {
   /* We use useEffect() to launch the code inside it; because we add an array in the end,as second argument
   useEffect() will launch only one time.
   */
-useEffect(() => {
+useEffect(() => {newGame()}, []);
+
+function newGame(){
+
+    // We make sure the hooks are in their initial state, as maybe the player reset the game in the middle of a move/turn
+    setTurnCounter(0);
+    setDisable(false);
+    setCard1(undefined);
+
     // We fetch a colection of objects from a API, that offer "users" (with photos and other useful data)
     fetch("https://randomuser.me/api/?results=2")
       .then((res) => res.json())
-      .then((data) => {
-        
-
+      .then((data) => 
+      {
         // We save the results
         let setOne = data.results;
         /* We deep clone the save results. Deep clone means we are really creating a copy, a new object, 
@@ -59,8 +66,8 @@ useEffect(() => {
         setImgGroup(() => {
           return [...finalSet];
         });
-      });
-  }, []);
+    });
+}
 
   //mix array results (code from Stack overflow) :)
   function shuffle(array) {
@@ -179,7 +186,7 @@ useEffect(() => {
       <div className={BoardClasses["flxrow"]}>
 
       <p>Turns: {turnCounter}</p>
-      
+      <button onClick={() => newGame()}>New game</button>
         {/* Game Cards */}
         
         {imgGroup &&
