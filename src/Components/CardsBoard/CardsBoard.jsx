@@ -42,7 +42,7 @@ function newGame(){
     setTurnCounter(0);
     setDisable(false);
     setCard1(undefined);
-    let n = 2;
+    let n = 10;
     setGameOver(n);
     // We fetch a colection of objects from a API, that offer "users" (with photos and other useful data)
     fetch("https://randomuser.me/api/?results=" + n)
@@ -184,11 +184,16 @@ function newGame(){
   //return jsx
   return (
     <>
-      <div className={BoardClasses["flxrow"]}>
-
+      <div className="container">
+        
       <p>Turns: {turnCounter}</p>
       <button onClick={() => newGame()}>New game</button>
       {gameOver <= 0 ? <p>Game Over !</p> : ""}
+      
+      
+      <div className={BoardClasses["flxrow"]}>
+
+      
         {/* Game Cards */}
         
         {imgGroup &&
@@ -206,6 +211,8 @@ function newGame(){
             />
           ))}
       </div>
+      </div>
+      
     </>
   );
 };
