@@ -180,6 +180,11 @@ function newGame(){
       })
     })}, 1000);
   }
+
+/*
+  Here it start the code from https://codepen.io/chrissimmons/pen/WprrQe
+  This code help style the "game over" in the final message
+*/
   var otTitle = document.getElementById("textBox"),
 		sSpan = document.getElementsByClassName('text').length,
 		letters = document.getElementsByClassName('text'),
@@ -233,11 +238,23 @@ setInterval(function() {
           {gameOver <= 0 ? 
           <div className={BoardClasses["gameOver"]}>
             <div id="textBox">
-              <div class="textSec"><span class="text">G</span><span class="text">a</span><span class="text">m</span><span class="text">e</span></div>
-              <div class="textSec"><span class="text">o</span><span class="text">v</span><span class="text">e</span><span class="text">r</span><span class="text">!</span></div>
+              <div class="textSec">
+              <p> 
+                <span class="text">G</span>
+                <span class="text">a</span>
+                <span class="text">m</span>
+                <span class="text">e</span>
+                <span> </span>
+                <span class="text">o</span>
+                <span class="text">v
+                </span><span class="text">e</span>
+                <span class="text">r</span>
+                <span class="text">!</span>
+              </p>
+              </div>
             </div>
-            <p>It took you: {turnCounter} turns to beat the game.
-               Can you break your own record?</p>
+            <p>It took you: {turnCounter} turns to beat the game.</p>
+            <p>Can you break your own record?</p>
             <button onClick={() => newGame()}>New game</button>
           </div>
         : ""}
