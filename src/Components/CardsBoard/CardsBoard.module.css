@@ -23,6 +23,10 @@
   color: #fff;
   padding: 2%;
 }
+/* 
+  Here it start the code from https://codepen.io/chrissimmons/pen/WprrQe
+  This code help style the "game over" in the final message 
+*/
 #textBox {
   max-width: 70%;
   display: block;
