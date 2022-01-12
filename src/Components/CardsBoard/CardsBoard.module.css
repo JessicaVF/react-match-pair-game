@@ -23,3 +23,26 @@
   color: #fff;
   padding: 2%;
 }
+#textBox {
+  max-width: 70%;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  text-align: center;
+  color: whitesmoke;
+  line-height: 150%;
+  font-variant: small-caps;
+  font-family: "Audiowide";
+  font-size: calc(5px + 4vw);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+#textBox .textSec {
+  margin: 0 15px 0 15px;
+}
+#textBox .textSec span {
+  transition: all 0.1s ease;
+  margin: 0.5px;
+  -webkit-filter: brightness(120%);
+}

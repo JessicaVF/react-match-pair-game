@@ -42,7 +42,7 @@ function newGame(){
     setTurnCounter(0);
     setDisable(false);
     setCard1(undefined);
-    let n = 10;
+    let n = 2;
     setGameOver(n);
     // We fetch a colection of objects from a API, that offer "users" (with photos and other useful data)
     fetch("https://randomuser.me/api/?results=" + n)
@@ -180,6 +180,39 @@ function newGame(){
       })
     })}, 1000);
   }
+  var otTitle = document.getElementById("textBox"),
+		sSpan = document.getElementsByClassName('text').length,
+		letters = document.getElementsByClassName('text'),
+		whichLetter = 0,
+		trailAmount = 7;
+
+
+//Used to get random colors
+function getRandomColor() {
+	var letters = '0123456789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
+}
+
+//Animate color change 
+setInterval(function() {
+	var rColor = getRandomColor();
+	var tColor = getRandomColor();
+	if (whichLetter < sSpan + trailAmount) {
+		if (whichLetter > (trailAmount - 1)) {
+			letters[(whichLetter - trailAmount)].style.color = 'whitesmoke';
+		}
+		if (whichLetter < sSpan) {
+			letters[whichLetter].style.color = rColor;
+			letters[whichLetter].style.textShadow = '0px 0px 10px ' + tColor;
+		}
+		whichLetter++;
+	} else if (whichLetter > sSpan + (trailAmount - 1)) whichLetter = 0;
+}, 75)
+
 
   //return jsx
   return (
@@ -199,7 +232,10 @@ function newGame(){
         
           {gameOver <= 0 ? 
           <div className={BoardClasses["gameOver"]}>
-            <p>Game Over !</p>
+            <div id="textBox">
+              <div class="textSec"><span class="text">G</span><span class="text">a</span><span class="text">m</span><span class="text">e</span></div>
+              <div class="textSec"><span class="text">o</span><span class="text">v</span><span class="text">e</span><span class="text">r</span><span class="text">!</span></div>
+            </div>
             <p>It took you: {turnCounter} turns to beat the game.
                Can you break your own record?</p>
             <button onClick={() => newGame()}>New game</button>
