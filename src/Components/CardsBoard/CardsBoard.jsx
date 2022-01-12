@@ -189,14 +189,16 @@ function newGame(){
         <div className={BoardClasses["container"]}>
           <p>Turns: {turnCounter}</p>
           <button onClick={() => newGame()}>New game</button>
-          {gameOver <= 0 ? <p>Game Over !</p> : ""}
+          
           <br></br>
         </div> 
       <div className={BoardClasses["flxrow"]}>
 
       
         {/* Game Cards */}
-        
+        <div className={BoardClasses["gameOver"]}>
+          {gameOver <= 0 ? <p>Game Over !</p> : ""}
+        </div>
         {imgGroup &&
           imgGroup.map((userObj, index) => (
             <Cards

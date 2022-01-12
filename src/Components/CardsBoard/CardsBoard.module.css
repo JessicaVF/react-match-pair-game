@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   border: solid 2px black;
   justify-content: center;
+  position: relative;
 }
 .container {
   display: flex;
@@ -10,11 +11,10 @@
   align-items: center;
   flex-direction: column;
 }
-.gameHead {
-  border: solid 2px black;
-  background-color: blueviolet;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+.gameOver {
+  background-color: black;
+  color: white;
+  position: absolute;
+  top: 45%;
 }
