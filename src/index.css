@@ -4,6 +4,9 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+.font-link {
+  font-family: "Audiowide", cursive;
+}
 @-ms-viewport {
   width: device-width;
 }

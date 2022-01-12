@@ -225,7 +225,7 @@ setInterval(function() {
     
       <div className="container">
         <div className={BoardClasses["container"]}>
-          <p>Turns: {turnCounter}</p>
+          <p className="font-link">Turns: {turnCounter}</p>
           <button onClick={() => newGame()}>New game</button>
           
           <br></br>
@@ -237,19 +237,19 @@ setInterval(function() {
         
           {gameOver <= 0 ? 
           <div className={BoardClasses["gameOver"]}>
-            <div id="textBox">
-              <div class="textSec">
+            <div id="textBox" className="font-link">
+              <div className="textSec">
               <p> 
-                <span class="text">G</span>
-                <span class="text">a</span>
-                <span class="text">m</span>
-                <span class="text">e</span>
+                <span className="text">G</span>
+                <span className="text">a</span>
+                <span className="text">m</span>
+                <span className="text">e</span>
                 <span> </span>
-                <span class="text">o</span>
-                <span class="text">v
-                </span><span class="text">e</span>
-                <span class="text">r</span>
-                <span class="text">!</span>
+                <span className="text">o</span>
+                <span className="text">v</span>
+                <span className="text">e</span>
+                <span className="text">r</span>
+                <span className="text">!</span>
               </p>
               </div>
             </div>
