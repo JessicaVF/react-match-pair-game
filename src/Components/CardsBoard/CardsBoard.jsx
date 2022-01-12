@@ -196,9 +196,17 @@ function newGame(){
 
       
         {/* Game Cards */}
-        <div className={BoardClasses["gameOver"]}>
-          {gameOver <= 0 ? <p>Game Over !</p> : ""}
-        </div>
+        
+          {gameOver <= 0 ? 
+          <div className={BoardClasses["gameOver"]}>
+            <p>Game Over !</p>
+            <p>It took you: {turnCounter} turns to beat the game.
+               Can you break your own record?</p>
+            <button onClick={() => newGame()}>New game</button>
+          </div>
+        : ""}
+          
+        
         {imgGroup &&
           imgGroup.map((userObj, index) => (
             <Cards
